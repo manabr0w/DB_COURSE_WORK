@@ -22,56 +22,40 @@
 
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
+    actor "Administrator" as Admin
+'----------------------------------------------------------------
+    'Проходження опитувань
+    usecase completing_surveys as "Брати участь в опитуваннях" <<Completing surveys>> #EA9058
+    usecase join_survey as "Долучитися до опитування" <<Join survey>> #FFFFFF
+    usecase take_survey as "Пройти опитування" <<Take survey>> #FFFFFF
 
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
+    'Керування анкетами опитуваннь
+    usecase manage_surveys as "Керування опитуваннями" <<Manage surveys>> #DD8EF6
+    usecase create_new_survey as "Створити нове опитування" <<Create new survey>> #FFFFFF
+    usecase delete_survey as "Видалити опитування" <<Delete survey>> #FFFFFF
+    usecase see_survey_results as "Подивитись результати опитування" <<See survey results>> #FFFFFF
+    usecase share_survey_link as "Відправити посиланням на опитування" <<Share survey`s link>> #FFFFFF
 
+    'керування обліковим записом
+    usecase account_management as "Керування обліковими записами" <<Account Management>> #C7F151
+    usecase registration as "Реєстрація нового облікового запису" <<Registration>> #FFFFFF
+    usecase authorization as "Авторізація за наявним обліковим записом" <<Authorization>> #FFFFFF
 
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
+'----------------------------------------------------------------
+    Admin -right-> completing_surveys: extend
+    Admin -down-> manage_surveys: extend
+    Admin -up-> account_management: extend
+
+    completing_surveys -right-.> join_survey: extend
+    completing_surveys -right-.> take_survey: extend
+
+    manage_surveys -down-.> create_new_survey: extend
+    manage_surveys -down-.> delete_survey: extend
+    manage_surveys -down-.> share_survey_link: extend
+    manage_surveys -down-.> see_survey_results: extend
+
+    account_management -up-.> registration: extend
+    account_management -up-.> authorization: extend
 
 @enduml
 
@@ -88,61 +72,6 @@
     box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
     padding: 1em;"
     >
-
-@startuml
-
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
-
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
-
-
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
-
-@enduml
 
 
 
