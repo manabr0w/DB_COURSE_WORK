@@ -1,5 +1,6 @@
 # Модель прецедентів
 
+<<<<<<< Updated upstream
 ### Редагування опитування
 
 | **ID**             | SurveyEditing                      |
@@ -83,6 +84,41 @@
 </center>
 
 ### Створення опитування
+=======
+## Загальна діаграма прецедентів
+
+@startuml
+actor Адміністратор
+actor Експерт
+actor Система
+
+usecase "Створення опитування" as SurveyCreation
+usecase "Редагування опитування" as SurveyEditing
+usecase "Перегляд результатів опитування" as SurveyResultsReview
+usecase "Проходження опитування" as SurveyCompletionProcess
+usecase "Оцінка опитування" as SurveyReviewByExpertProcess
+usecase "Реєстрація користувача на платформі" as UserRegistration
+
+Адміністратор --> Система : "Авторизація"
+Адміністратор --> SurveyCreation : "Створення опитування"
+Адміністратор --> SurveyEditing : "Редагування опитування"
+Адміністратор --> SurveyResultsReview : "Перегляд результатів"
+
+Експерт --> Система : "Авторизація"
+Експерт --> SurveyCompletionProcess : "Проходження опитування"
+Експерт --> SurveyReviewByExpertProcess : "Оцінка опитування"
+
+Система --> UserRegistration : "Реєстрація користувачів"
+Система --> SurveyCreation : "Збереження опитування"
+Система --> SurveyEditing : "Зберігання змін"
+Система --> SurveyResultsReview : "Генерація звітів"
+Система --> SurveyCompletionProcess : "Збереження відповідей"
+Система --> SurveyReviewByExpertProcess : "Збереження відгуків"
+
+@enduml
+
+## Сценарії виконання
+>>>>>>> Stashed changes
 
 | **ID**             | SurveyCreation                     |
 |--------------------|------------------------------------|
