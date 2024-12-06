@@ -66,6 +66,47 @@ Servey.result -u- Result
 
 @enduml 
 
-- ER-модель
+## ER-модель
+@startuml
+
+entity Permission {
+  +id: int
+  +name: string
+  +description: string
+}
+
+entity Role {
+  +id: int
+  +name: string
+  +description: string
+}
+
+entity User {
+  +id: int
+  +name: string
+  +lastname: string
+  +password: string
+}
+
+entity Survey {
+  +id: int
+  +name: string
+  +description: string
+}
+
+entity Result {
+  +id: int
+  +name: string
+  +description: string
+}
+
+Permission -- "0..*" Role : assigns >
+Role -- "0..*" User : contains >
+Role -- "0..*" Permission : grants >
+
+User -- "0..*" Survey : completes >
+Survey -- "1..*" Result : generates >
+
+@enduml
 - реляційна схема
 
