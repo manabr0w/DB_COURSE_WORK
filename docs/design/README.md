@@ -94,10 +94,27 @@ entity Survey {
   +description: string
 }
 
+entity Question {
+  +id: int
+  +text: string
+  +type: enum {open, closed, multiply_choice}
+  +isNecessary: bool
+}
+
 entity Result {
   +id: int
   +name: string
   +description: string
+}
+
+entity AnswerOption {
+  +id: int
+  +text: string
+}
+
+entity UserAnswer {
+  +id: int
+  +answer: string
 }
 
 Permission -- "0..*" Role : assigns >
@@ -105,7 +122,13 @@ Role -- "0..*" User : contains >
 Role -- "0..*" Permission : grants >
 
 User -- "0..*" Survey : completes >
+Survey -- "1..*" Question : answers
 Survey -- "1..*" Result : generates >
+Question -- "0..*" AnswerOption : has
+Result -- "1..*" UserAnswer : contains
+UserAnswer -- "1..*" Question : answers
+Question -- "1..*" UserAnswer : isAnsweredIn
+
 
 @enduml
 - реляційна схема
