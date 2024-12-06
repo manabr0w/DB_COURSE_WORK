@@ -67,5 +67,9 @@ Servey.result -u- Result
 @enduml 
 
 - ER-модель
-- реляційна схема
+##  Реляційна схема
+
+![relational-schema](https://github.com/user-attachments/assets/cf55f090-77ab-4c5a-89e2-a522d5a49361)
+
+
 
